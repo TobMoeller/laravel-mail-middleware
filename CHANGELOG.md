@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-mail-allowlist` will be documented in this file.
 
+## 0.7 - 2025-03-01
+
+### What's Changed
+
+* Laravel 12 support by @TobMoeller in https://github.com/TobMoeller/laravel-mail-middleware/pull/2
+
+**Full Changelog**: https://github.com/TobMoeller/laravel-mail-middleware/compare/0.6...0.7
+
 ## 0.6 - 2025-03-01
 
 ### What's Changed
