@@ -1,9 +1,9 @@
 # Prevent stray mails from your Laravel application
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/tobmoeller/laravel-mail-allowlist.svg?style=flat-square)](https://packagist.org/packages/tobmoeller/laravel-mail-allowlist)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tobmoeller/laravel-mail-allowlist/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/tobmoeller/laravel-mail-allowlist/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/tobmoeller/laravel-mail-allowlist/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/tobmoeller/laravel-mail-allowlist/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/tobmoeller/laravel-mail-allowlist.svg?style=flat-square)](https://packagist.org/packages/tobmoeller/laravel-mail-allowlist)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tobmoeller/laravel-mail-middleware.svg?style=flat-square)](https://packagist.org/packages/tobmoeller/laravel-mail-middleware)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/tobmoeller/laravel-mail-middleware/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/tobmoeller/laravel-mail-middleware/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/tobmoeller/laravel-mail-middleware/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/tobmoeller/laravel-mail-middleware/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/tobmoeller/laravel-mail-middleware.svg?style=flat-square)](https://packagist.org/packages/tobmoeller/laravel-mail-middleware)
 
 This package provides a customizable middleware pipeline for email messages, allowing you to filter, modify, and inspect emails before they are sent as well as inspecting just sent emails.
 
@@ -38,20 +38,20 @@ This package provides a customizable middleware pipeline for email messages, all
 
 > **Important Note:**
 >
-> This package utilizes Laravel's `MessageSending` and `MessageSent` events to inspect and modify outgoing emails. If your application has custom listeners or modifications affecting this event, please thoroughly test the package to ensure it integrates seamlessly and maintains the correct filtering functionality.
+> This package utilizes Laravel's `MessageSending` and `MessageSent` events to inspect and modify outgoing emails. If your application has custom listeners or modifications affecting these events, please thoroughly test the package to ensure it integrates seamlessly and maintains the correct filtering functionality.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require tobmoeller/laravel-mail-allowlist
+composer require tobmoeller/laravel-mail-middleware
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="mail-allowlist-config"
+php artisan vendor:publish --tag="mail-middleware-config"
 ```
 
 Your Laravel application will merge your local config file with the package config file. This enables you to just keep the edited configuration values.
@@ -63,34 +63,34 @@ You can configure the package through environment variables:
 
 ```dotenv
 # Enable the package
-MAIL_ALLOWLIST_ENABLED=true
+MAIL_MIDDLEWARE_PACKAGE_ENABLED=true
 
 # Enable the mail middleware (allowlist, global recipients)
-MAIL_ALLOWLIST_MIDDLEWARE_ENABLED=true
+MAIL_MIDDLEWARE_ENABLED=true
 
 # Define a semicolon separated list of allowed domains
-MAIL_ALLOWLIST_ALLOWED_DOMAINS="foo.com;bar.com"
+MAIL_MIDDLEWARE_ALLOWED_DOMAINS="foo.com;bar.com"
 
 # Define a semicolon separated list of allowed emails
-MAIL_ALLOWLIST_ALLOWED_EMAILS="mail@foo.com;mail@bar.com"
+MAIL_MIDDLEWARE_ALLOWED_EMAILS="mail@foo.com;mail@bar.com"
 
 # Define a semicolon separated list of globally added emails
-MAIL_ALLOWLIST_GLOBAL_TO="mail@foo.com;mail@bar.com"
-MAIL_ALLOWLIST_GLOBAL_CC="mail@foo.com;mail@bar.com"
-MAIL_ALLOWLIST_GLOBAL_BCC="mail@foo.com;mail@bar.com"
+MAIL_MIDDLEWARE_GLOBAL_TO="mail@foo.com;mail@bar.com"
+MAIL_MIDDLEWARE_GLOBAL_CC="mail@foo.com;mail@bar.com"
+MAIL_MIDDLEWARE_GLOBAL_BCC="mail@foo.com;mail@bar.com"
 
 # Configure the logging of emails before they are sent
-MAIL_ALLOWLIST_LOG_ENABLED=true
-MAIL_ALLOWLIST_LOG_CHANNEL=stack # optional, defaults to Laravel's logging.default
-MAIL_ALLOWLIST_LOG_LEVEL=error # optional, defaults to info
+MAIL_MIDDLEWARE_LOG_ENABLED=true
+MAIL_MIDDLEWARE_LOG_CHANNEL=stack # optional, defaults to Laravel's logging.default
+MAIL_MIDDLEWARE_LOG_LEVEL=error # optional, defaults to info
 
 # Enable mail middleware that runs after the email is sent
-MAIL_ALLOWLIST_SENT_MIDDLEWARE_ENABLED=true
+MAIL_MIDDLEWARE_SENT_ENABLED=true
 
 # Configure the logging of emails after they are sent
-MAIL_ALLOWLIST_SENT_LOG_ENABLED=true # optional, defaults to sending log
-MAIL_ALLOWLIST_SENT_LOG_CHANNEL=stack # optional, defaults to sending log
-MAIL_ALLOWLIST_SENT_LOG_LEVEL=info # optional, defaults to sending log
+MAIL_MIDDLEWARE_SENT_LOG_ENABLED=true # optional, defaults to sending log
+MAIL_MIDDLEWARE_SENT_LOG_CHANNEL=stack # optional, defaults to sending log
+MAIL_MIDDLEWARE_SENT_LOG_LEVEL=info # optional, defaults to sending log
 ```
 
 ### Customizing the Middleware Pipeline

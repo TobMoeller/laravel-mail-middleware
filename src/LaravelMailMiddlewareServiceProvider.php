@@ -26,7 +26,7 @@ class LaravelMailMiddlewareServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-mail-middleware')
-            ->hasConfigFile();
+            ->hasConfigFile('mail-middleware');
     }
 
     public function packageRegistered(): void
