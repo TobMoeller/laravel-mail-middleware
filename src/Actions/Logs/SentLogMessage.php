@@ -1,10 +1,10 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Logs;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Logs;
 
 use Illuminate\Support\Facades\Log;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 class SentLogMessage implements SentLogMessageContract
 {
@@ -14,7 +14,7 @@ class SentLogMessage implements SentLogMessageContract
     {
         $message = $this->generateLogMessage->generate($messageContext);
 
-        Log::channel(LaravelMailAllowlist::sentLogChannel())
-            ->log(LaravelMailAllowlist::sentLogLevel(), $message);
+        Log::channel(LaravelMailMiddleware::sentLogChannel())
+            ->log(LaravelMailMiddleware::sentLogLevel(), $message);
     }
 }

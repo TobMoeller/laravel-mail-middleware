@@ -1,18 +1,18 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses;
 
 use Closure;
 use Illuminate\Support\Arr;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class AddGlobalBcc implements MailMiddlewareContract
 {
     public function handle(MessageContext $messageContext, Closure $next): mixed
     {
-        if (! empty($bcc = LaravelMailAllowlist::globalBccEmailList())) {
+        if (! empty($bcc = LaravelMailMiddleware::globalBccEmailList())) {
             $messageContext->getMessage()->addBcc(...$bcc);
 
             $bccList = Arr::join($bcc, ';');

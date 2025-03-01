@@ -1,16 +1,16 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Facades;
+namespace TobMoeller\LaravelMailMiddleware\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \TobMoeller\LaravelMailAllowlist\LaravelMailAllowlist
+ * @see \TobMoeller\LaravelMailMiddleware\LaravelMailMiddleware
  */
-class LaravelMailAllowlist extends Facade
+class LaravelMailMiddleware extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \TobMoeller\LaravelMailAllowlist\LaravelMailAllowlist::class;
+        return \TobMoeller\LaravelMailMiddleware\LaravelMailMiddleware::class;
     }
 }

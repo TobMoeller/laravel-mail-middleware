@@ -1,15 +1,15 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses;
 
 use Closure;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Symfony\Component\Mime\Address;
-use TobMoeller\LaravelMailAllowlist\Actions\Addresses\CheckAddressContract;
-use TobMoeller\LaravelMailAllowlist\Enums\Header;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Addresses\CheckAddressContract;
+use TobMoeller\LaravelMailMiddleware\Enums\Header;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class AddressFilter implements MailMiddlewareContract
 {

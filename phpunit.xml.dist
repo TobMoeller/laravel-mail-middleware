@@ -29,6 +29,6 @@
         </include>
     </source>
     <php>
-        <env name="MAIL_ALLOWLIST_ENABLED" value="true"/>
+        <env name="MAIL_MIDDLEWARE_PACKAGE_ENABLED" value="true"/>
     </php>
 </phpunit>

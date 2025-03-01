@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\AddGlobalBcc;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\AddGlobalBcc;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('adds global bcc addresses and continues the pipeline', function () {
     Config::set('mail-allowlist.sending.middleware.global.bcc', ['foo@bar.com', 'bar@foo.com']);

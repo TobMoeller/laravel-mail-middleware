@@ -1,10 +1,10 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses;
 
 use Closure;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class EnsureRecipients implements MailMiddlewareContract
 {

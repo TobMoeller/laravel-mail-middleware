@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LogLevel;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessageContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessageContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('is bound to interface', function () {
     expect(app(LogMessageContract::class))

@@ -1,6 +1,6 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Addresses;
 
 use Symfony\Component\Mime\Address;
 

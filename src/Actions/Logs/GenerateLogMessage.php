@@ -1,15 +1,15 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Logs;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Logs;
 
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class GenerateLogMessage implements GenerateLogMessageContract
 {
     public function generate(MessageContext $messageContext): string
     {
-        $logMessage = 'LaravelMailAllowlist.MessageSending:';
+        $logMessage = 'LaravelMailMiddleware.MessageSending:';
 
         if ($className = $messageContext->getOriginatingClassName()) {
             $logMessage .= PHP_EOL.'ClassName: '.$className;
@@ -19,19 +19,19 @@ class GenerateLogMessage implements GenerateLogMessageContract
             $logMessage .= PHP_EOL.'Message was canceled by Middleware!';
         }
 
-        if (LaravelMailAllowlist::logMiddleware()) {
+        if (LaravelMailMiddleware::logMiddleware()) {
             $logMessage .= $this->generateMiddlewareMessage($messageContext);
         }
 
-        if (LaravelMailAllowlist::logHeaders()) {
+        if (LaravelMailMiddleware::logHeaders()) {
             $logMessage .= $this->generateHeadersMessage($messageContext);
         }
 
-        if (LaravelMailAllowlist::logMessageData()) {
+        if (LaravelMailMiddleware::logMessageData()) {
             $logMessage .= $this->generateMessageDataMessage($messageContext);
         }
 
-        if (LaravelMailAllowlist::logBody()) {
+        if (LaravelMailMiddleware::logBody()) {
             $logMessage .= $this->generateBodyMessage($messageContext);
         }
 

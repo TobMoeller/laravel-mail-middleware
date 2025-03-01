@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Mime\Address;
-use TobMoeller\LaravelMailAllowlist\Actions\Addresses\IsAllowedRecipient;
+use TobMoeller\LaravelMailMiddleware\Actions\Addresses\IsAllowedRecipient;
 
 it('gets initialized with allowed domain and email lists', function () {
     Config::set('mail-allowlist.sending.middleware.allowed.domains', $allowedDomains = ['foo.de', 'bar.de']);

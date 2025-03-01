@@ -1,10 +1,10 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Logs;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Logs;
 
 use Illuminate\Support\Facades\Log;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class LogMessage implements LogMessageContract
 {
@@ -14,7 +14,7 @@ class LogMessage implements LogMessageContract
     {
         $message = $this->generateLogMessage->generate($messageContext);
 
-        Log::channel(LaravelMailAllowlist::logChannel())
-            ->log(LaravelMailAllowlist::logLevel(), $message);
+        Log::channel(LaravelMailMiddleware::logChannel())
+            ->log(LaravelMailMiddleware::logLevel(), $message);
     }
 }

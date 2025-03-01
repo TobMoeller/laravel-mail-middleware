@@ -1,10 +1,10 @@
 <?php
 
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\Actions\Addresses\IsAllowedRecipient;
-use TobMoeller\LaravelMailAllowlist\Enums\Header;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\CcFilter;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Addresses\IsAllowedRecipient;
+use TobMoeller\LaravelMailMiddleware\Enums\Header;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\CcFilter;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('creates an address filter for "to" with IsAllowedRecipient address checker', function () {
     $filter = app(CcFilter::class);

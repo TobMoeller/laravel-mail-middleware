@@ -1,26 +1,26 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist;
+namespace TobMoeller\LaravelMailMiddleware;
 
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Support\Facades\Event;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use TobMoeller\LaravelMailAllowlist\Actions\Addresses\IsAllowedRecipient;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateLogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateSentLogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateSentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\Listeners\MessageSendingListener;
-use TobMoeller\LaravelMailAllowlist\Listeners\MessageSentListener;
+use TobMoeller\LaravelMailMiddleware\Actions\Addresses\IsAllowedRecipient;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateLogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateSentLogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateSentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\Listeners\MessageSendingListener;
+use TobMoeller\LaravelMailMiddleware\Listeners\MessageSentListener;
 
-class LaravelMailAllowlistServiceProvider extends PackageServiceProvider
+class LaravelMailMiddlewareServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -39,15 +39,15 @@ class LaravelMailAllowlistServiceProvider extends PackageServiceProvider
 
         $this->app->singleton(IsAllowedRecipient::class, function () {
             return new IsAllowedRecipient(
-                LaravelMailAllowlist::allowedDomainList(),
-                LaravelMailAllowlist::allowedEmailList(),
+                LaravelMailMiddleware::allowedDomainList(),
+                LaravelMailMiddleware::allowedEmailList(),
             );
         });
     }
 
     public function packageBooted(): void
     {
-        if (LaravelMailAllowlist::enabled()) {
+        if (LaravelMailMiddleware::enabled()) {
             Event::listen(MessageSending::class, MessageSendingListener::class);
             Event::listen(MessageSent::class, MessageSentListener::class);
         }

@@ -6,7 +6,7 @@ use Symfony\Component\Mailer\SentMessage as SymfonySentMessage;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
-use TobMoeller\LaravelMailAllowlist\Tests\TestCase;
+use TobMoeller\LaravelMailMiddleware\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 

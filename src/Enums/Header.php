@@ -1,6 +1,6 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Enums;
+namespace TobMoeller\LaravelMailMiddleware\Enums;
 
 /**
  * Corresponds to Symfony\Component\Mime\Header\Headers::HEADER_CLASS_MAP

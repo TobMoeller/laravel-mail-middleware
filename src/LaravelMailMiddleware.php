@@ -1,15 +1,15 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist;
+namespace TobMoeller\LaravelMailMiddleware;
 
 use Illuminate\Support\Facades\Config;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use ReflectionClass;
 use Throwable;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
 
-class LaravelMailAllowlist
+class LaravelMailMiddleware
 {
     public function enabled(): bool
     {

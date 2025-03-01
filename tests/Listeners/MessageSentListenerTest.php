@@ -4,9 +4,9 @@ use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessage;
-use TobMoeller\LaravelMailAllowlist\Listeners\MessageSentListener;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessage;
+use TobMoeller\LaravelMailMiddleware\Listeners\MessageSentListener;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 beforeEach(function () {
     $this->message = new Email;

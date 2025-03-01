@@ -2,8 +2,8 @@
 
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\EnsureRecipients;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\EnsureRecipients;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('cancels the mail if no to recipients are found', function () {
     $mail = new Email;

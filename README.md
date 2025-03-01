@@ -129,8 +129,8 @@ You can add your own middleware to the pipeline to modify, inspect, or control o
 
 ```php
 use Closure;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class CancelMessageMiddleware implements MailMiddlewareContract
 {
@@ -165,8 +165,8 @@ You can add custom middleware to the sent pipeline to run custom logic on the se
 
 ```php
 use Closure;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\MailSentMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\MailSentMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 class CustomSentMessageMiddleware implements MailSentMiddlewareContract
 {
@@ -188,9 +188,9 @@ You can control most of the logging behavior from environment variables or the c
 Create a new class that implements `GenerateLogMessageContract` to define how log messages are generated:
 
 ```php
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class CustomLogMessage implements GenerateLogMessageContract
 {
@@ -206,9 +206,9 @@ class CustomLogMessage implements GenerateLogMessageContract
 Create a new class that implements `LogMessageContract` to define how log messages are handled:
 
 ```php
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class CustomMessageLogging implements LogMessageContract
 {
@@ -233,8 +233,8 @@ class CustomMessageLogging implements LogMessageContract
 To instruct Laravel to use your custom classes, you need to bind them in your application's service container. This is typically done in a service provider like `App\Providers\AppServiceProvider`.
 
 ```php
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessageContract;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -254,8 +254,8 @@ class AppServiceProvider extends ServiceProvider
 Customizing the logging for already sent mails is similar to customizing the logging of outgoing mails. You have to bind your custom implementations of the `SentLogMessageContract` and `GenerateSentLogMessageContract` interfaces in a service provider.
 
 ```php
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateSentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateSentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessageContract;
 
 class AppServiceProvider extends ServiceProvider
 {

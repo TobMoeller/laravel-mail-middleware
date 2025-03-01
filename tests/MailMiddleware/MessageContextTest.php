@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('holds message information', function () {
     $message = new Email;
