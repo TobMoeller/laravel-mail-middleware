@@ -32,6 +32,7 @@ class LaravelMailMiddleware
     {
         $middleware = Config::get('mail-middleware.sending.middleware.pipeline');
 
+        /** @phpstan-ignore return.type */
         return is_array($middleware) ? $middleware : [];
     }
 
@@ -98,6 +99,7 @@ class LaravelMailMiddleware
         }
 
         if (is_array($configValue)) {
+            /** @phpstan-ignore return.type */
             return $configValue;
         }
 
@@ -122,6 +124,7 @@ class LaravelMailMiddleware
     {
         $middleware = Config::get('mail-middleware.sent.middleware.pipeline');
 
+        /** @phpstan-ignore return.type */
         return is_array($middleware) ? $middleware : [];
     }
 
