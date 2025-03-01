@@ -1,12 +1,13 @@
 {
-    "name": "tobmoeller/laravel-mail-allowlist",
+    "name": "tobmoeller/laravel-mail-middleware",
     "description": "Prevent stray mails from your laravel application",
     "keywords": [
         "Tobias Möller",
         "laravel",
-        "laravel-mail-allowlist"
+        "laravel-mail-allowlist",
+        "laravel-mail-middleware"
     ],
-    "homepage": "https://github.com/tobmoeller/laravel-mail-allowlist",
+    "homepage": "https://github.com/tobmoeller/laravel-mail-middleware",
     "license": "MIT",
     "authors": [
         {
@@ -46,7 +47,7 @@
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-laravel-mail-allowlist --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-mail-middleware --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
