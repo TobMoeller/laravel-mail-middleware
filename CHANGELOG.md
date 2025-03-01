@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-mail-allowlist` will be documented in this file.
 
+## 0.6 - 2025-03-01
+
+### What's Changed
+
+* Change name by @TobMoeller in https://github.com/TobMoeller/laravel-mail-middleware/pull/1
+
+### New Contributors
+
+* @TobMoeller made their first contribution in https://github.com/TobMoeller/laravel-mail-middleware/pull/1
+
+**Full Changelog**: https://github.com/TobMoeller/laravel-mail-middleware/commits/0.6
+
 ## 0.5 - 2024-10-16
 
 ### Breaking Changes
