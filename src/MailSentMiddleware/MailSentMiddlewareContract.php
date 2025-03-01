@@ -1,6 +1,6 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailSentMiddleware;
+namespace TobMoeller\LaravelMailMiddleware\MailSentMiddleware;
 
 use Closure;
 

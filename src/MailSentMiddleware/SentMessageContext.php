@@ -1,13 +1,13 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailSentMiddleware;
+namespace TobMoeller\LaravelMailMiddleware\MailSentMiddleware;
 
 use Illuminate\Mail\SentMessage;
 use Illuminate\Support\Collection;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
-use TobMoeller\LaravelMailAllowlist\Traits\MailMiddleware\HandlesMessageData;
-use TobMoeller\LaravelMailAllowlist\Traits\MailMiddleware\LogsMessages;
+use TobMoeller\LaravelMailMiddleware\Traits\MailMiddleware\HandlesMessageData;
+use TobMoeller\LaravelMailMiddleware\Traits\MailMiddleware\LogsMessages;
 
 class SentMessageContext
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Listeners;
+namespace TobMoeller\LaravelMailMiddleware\Listeners;
 
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Support\Facades\Pipeline;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 class MessageSentListener
 {
@@ -17,7 +17,7 @@ class MessageSentListener
 
     public function handle(MessageSent $messageSent): void
     {
-        if (! LaravelMailAllowlist::enabled()) {
+        if (! LaravelMailMiddleware::enabled()) {
             return;
         }
 
@@ -26,13 +26,13 @@ class MessageSentListener
             'messageData' => $messageSent->data,
         ]);
 
-        if (LaravelMailAllowlist::sentMailMiddlewareEnabled()) {
+        if (LaravelMailMiddleware::sentMailMiddlewareEnabled()) {
             Pipeline::send($messageContext)
-                ->through(LaravelMailAllowlist::sentMailMiddleware())
+                ->through(LaravelMailMiddleware::sentMailMiddleware())
                 ->thenReturn();
         }
 
-        if (LaravelMailAllowlist::sentLogEnabled()) {
+        if (LaravelMailMiddleware::sentLogEnabled()) {
             $this->messageLogger->log($messageContext);
         }
     }

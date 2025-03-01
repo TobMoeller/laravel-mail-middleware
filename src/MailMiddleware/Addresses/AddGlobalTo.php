@@ -1,18 +1,18 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses;
 
 use Closure;
 use Illuminate\Support\Arr;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MailMiddlewareContract;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MailMiddlewareContract;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 class AddGlobalTo implements MailMiddlewareContract
 {
     public function handle(MessageContext $messageContext, Closure $next): mixed
     {
-        if (! empty($to = LaravelMailAllowlist::globalToEmailList())) {
+        if (! empty($to = LaravelMailMiddleware::globalToEmailList())) {
             $messageContext->getMessage()->addTo(...$to);
 
             $toList = Arr::join($to, ';');

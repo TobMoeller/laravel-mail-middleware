@@ -1,9 +1,9 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses;
 
-use TobMoeller\LaravelMailAllowlist\Actions\Addresses\IsAllowedRecipient;
-use TobMoeller\LaravelMailAllowlist\Enums\Header;
+use TobMoeller\LaravelMailMiddleware\Actions\Addresses\IsAllowedRecipient;
+use TobMoeller\LaravelMailMiddleware\Enums\Header;
 
 class CcFilter extends AddressFilter
 {

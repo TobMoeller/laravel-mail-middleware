@@ -1,10 +1,10 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Tests;
+namespace TobMoeller\LaravelMailMiddleware\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use TobMoeller\LaravelMailAllowlist\LaravelMailAllowlistServiceProvider;
+use TobMoeller\LaravelMailMiddleware\LaravelMailMiddlewareServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'TobMoeller\\LaravelMailAllowlist\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'TobMoeller\\LaravelMailMiddleware\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelMailAllowlistServiceProvider::class,
+            LaravelMailMiddlewareServiceProvider::class,
         ];
     }
 
@@ -29,7 +29,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-mail-allowlist_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-mail-middleware_table.php.stub';
         $migration->up();
         */
     }

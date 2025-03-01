@@ -1,6 +1,6 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Traits\MailMiddleware;
+namespace TobMoeller\LaravelMailMiddleware\Traits\MailMiddleware;
 
 trait LogsMessages
 {

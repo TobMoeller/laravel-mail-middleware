@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LogLevel;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\GenerateSentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessage;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\SentLogMessageContract;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\GenerateSentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessage;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\SentLogMessageContract;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 it('is bound to interface', function () {
     expect(app(SentLogMessageContract::class))
@@ -14,8 +14,8 @@ it('is bound to interface', function () {
 });
 
 it('logs the message context', function () {
-    Config::set('mail-allowlist.sent.log.channel', '::channel::');
-    Config::set('mail-allowlist.sent.log.level', LogLevel::INFO);
+    Config::set('mail-middleware.sent.log.channel', '::channel::');
+    Config::set('mail-middleware.sent.log.level', LogLevel::INFO);
 
     $context = new SentMessageContext(generateSentMessage());
 

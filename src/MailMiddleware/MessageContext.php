@@ -1,11 +1,11 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\MailMiddleware;
+namespace TobMoeller\LaravelMailMiddleware\MailMiddleware;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\Traits\MailMiddleware\HandlesMessageData;
-use TobMoeller\LaravelMailAllowlist\Traits\MailMiddleware\LogsMessages;
+use TobMoeller\LaravelMailMiddleware\Traits\MailMiddleware\HandlesMessageData;
+use TobMoeller\LaravelMailMiddleware\Traits\MailMiddleware\LogsMessages;
 
 class MessageContext
 {

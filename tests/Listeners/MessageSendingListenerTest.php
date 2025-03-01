@@ -4,12 +4,12 @@ use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Mime\Email;
-use TobMoeller\LaravelMailAllowlist\Actions\Logs\LogMessage;
-use TobMoeller\LaravelMailAllowlist\Listeners\MessageSendingListener;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\MessageContext;
+use TobMoeller\LaravelMailMiddleware\Actions\Logs\LogMessage;
+use TobMoeller\LaravelMailMiddleware\Listeners\MessageSendingListener;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('return null without running middleware if disabled', function () {
-    Config::set('mail-allowlist.enabled', false);
+    Config::set('mail-middleware.enabled', false);
 
     $loggerMock = Mockery::mock(LogMessage::class);
     $loggerMock->shouldNotReceive('log');
@@ -27,10 +27,10 @@ it('return null without running middleware if disabled', function () {
 });
 
 it('runs the middleware pipelines and returns if the message should be sent', function (bool $shouldSendMessage, bool $shouldLog) {
-    Config::set('mail-allowlist.enabled', true);
-    Config::set('mail-allowlist.sending.log.enabled', $shouldLog);
-    Config::set('mail-allowlist.sending.middleware.enabled', true);
-    Config::set('mail-allowlist.sending.middleware.pipeline', $middleware = ['::middleware::']);
+    Config::set('mail-middleware.enabled', true);
+    Config::set('mail-middleware.sending.log.enabled', $shouldLog);
+    Config::set('mail-middleware.sending.middleware.enabled', true);
+    Config::set('mail-middleware.sending.middleware.pipeline', $middleware = ['::middleware::']);
 
     $message = new Email;
 
@@ -73,9 +73,9 @@ it('runs the middleware pipelines and returns if the message should be sent', fu
 })->with([true, false], [true, false]);
 
 it('does not run the middleware if disabled', function () {
-    Config::set('mail-allowlist.enabled', true);
-    Config::set('mail-allowlist.sending.middleware.enabled', false);
-    Config::set('mail-allowlist.sending.middleware.pipeline', ['::middleware::']);
+    Config::set('mail-middleware.enabled', true);
+    Config::set('mail-middleware.sending.middleware.enabled', false);
+    Config::set('mail-middleware.sending.middleware.pipeline', ['::middleware::']);
 
     $loggerMock = Mockery::mock(LogMessage::class);
     $loggerMock->shouldNotReceive('log');

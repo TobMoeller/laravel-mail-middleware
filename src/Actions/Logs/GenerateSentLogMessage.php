@@ -1,53 +1,53 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Logs;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Logs;
 
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
-use TobMoeller\LaravelMailAllowlist\Facades\LaravelMailAllowlist;
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\Facades\LaravelMailMiddleware;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 class GenerateSentLogMessage implements GenerateSentLogMessageContract
 {
     public function generate(SentMessageContext $messageContext): string
     {
         $isEmail = ($message = $messageContext->getMessage()) instanceof Email;
-        $logMessage = 'LaravelMailAllowlist.MessageSent:';
+        $logMessage = 'LaravelMailMiddleware.MessageSent:';
 
         if ($className = $messageContext->getOriginatingClassName()) {
             $logMessage .= PHP_EOL.'ClassName: '.$className;
         }
 
-        if (LaravelMailAllowlist::sentLogMiddleware()) {
+        if (LaravelMailMiddleware::sentLogMiddleware()) {
             $logMessage .= $this->generateMiddlewareMessage($messageContext);
         }
 
-        if ($isEmail && LaravelMailAllowlist::sentLogHeaders()) {
+        if ($isEmail && LaravelMailMiddleware::sentLogHeaders()) {
             $logMessage .= $this->generateHeadersMessage($message);
         }
 
-        if (LaravelMailAllowlist::sentLogMessageData()) {
+        if (LaravelMailMiddleware::sentLogMessageData()) {
             $logMessage .= $this->generateMessageDataMessage($messageContext);
         }
 
-        if (LaravelMailAllowlist::sentLogDebugInformation()) {
+        if (LaravelMailMiddleware::sentLogDebugInformation()) {
             $logMessage .= $this->generateDebugMessage($messageContext);
         }
 
-        if ($isEmail && LaravelMailAllowlist::sentLogBody()) {
+        if ($isEmail && LaravelMailMiddleware::sentLogBody()) {
             $logMessage .= $this->generateBodyMessage($message);
         }
 
         // Handle RawMessage
         if (! $isEmail &&
-            LaravelMailAllowlist::sentLogHeaders() &&
-            LaravelMailAllowlist::sentLogBody()
+            LaravelMailMiddleware::sentLogHeaders() &&
+            LaravelMailMiddleware::sentLogBody()
         ) {
             $logMessage .= $this->generateRawMessageMessage($message);
         } elseif (! $isEmail &&
             (
-                LaravelMailAllowlist::sentLogHeaders() ||
-                LaravelMailAllowlist::sentLogBody()
+                LaravelMailMiddleware::sentLogHeaders() ||
+                LaravelMailMiddleware::sentLogBody()
             )
         ) {
             $logMessage .= PHP_EOL.__('RawMessages can only be logged including headers and body');

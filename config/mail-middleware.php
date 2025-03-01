@@ -1,19 +1,19 @@
 <?php
 
 use Psr\Log\LogLevel;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\AddGlobalBcc;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\AddGlobalCc;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\AddGlobalTo;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\BccFilter;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\CcFilter;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\EnsureRecipients;
-use TobMoeller\LaravelMailAllowlist\MailMiddleware\Addresses\ToFilter;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\AddGlobalBcc;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\AddGlobalCc;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\AddGlobalTo;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\BccFilter;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\CcFilter;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\EnsureRecipients;
+use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\ToFilter;
 
 return [
     /*
-     * Enables the mail allowlist.
+     * Enables the mail middleware package.
      */
-    'enabled' => env('MAIL_ALLOWLIST_ENABLED', false),
+    'enabled' => env('MAIL_MIDDLEWARE_PACKAGE_ENABLED', false),
 
     /*
      * ------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
          * Enables the mail middleware.
          */
         'middleware' => [
-            'enabled' => env('MAIL_ALLOWLIST_MIDDLEWARE_ENABLED', true),
+            'enabled' => env('MAIL_MIDDLEWARE_ENABLED', true),
 
             /*
              * Define the mail middleware every message should be passed through.
@@ -61,7 +61,7 @@ return [
                  * 'foo.com;bar.com;...'
                  * ['foo.com', 'bar.com']
                  */
-                'domains' => env('MAIL_ALLOWLIST_ALLOWED_DOMAINS'),
+                'domains' => env('MAIL_MIDDLEWARE_ALLOWED_DOMAINS'),
 
                 /*
                  * Can either be a singular email address string,
@@ -73,7 +73,7 @@ return [
                  * 'foo@bar.com;bar@foo.com;...'
                  * ['foo.com', 'bar.com']
                  */
-                'emails' => env('MAIL_ALLOWLIST_ALLOWED_EMAILS'),
+                'emails' => env('MAIL_MIDDLEWARE_ALLOWED_EMAILS'),
             ],
 
             /*
@@ -88,9 +88,9 @@ return [
              * ['foo.com', 'bar.com']
              */
             'global' => [
-                'to' => env('MAIL_ALLOWLIST_GLOBAL_TO'),
-                'cc' => env('MAIL_ALLOWLIST_GLOBAL_CC'),
-                'bcc' => env('MAIL_ALLOWLIST_GLOBAL_BCC'),
+                'to' => env('MAIL_MIDDLEWARE_GLOBAL_TO'),
+                'cc' => env('MAIL_MIDDLEWARE_GLOBAL_CC'),
+                'bcc' => env('MAIL_MIDDLEWARE_GLOBAL_BCC'),
             ],
         ],
 
@@ -101,7 +101,7 @@ return [
             /*
              * Enables the log.
              */
-            'enabled' => env('MAIL_ALLOWLIST_LOG_ENABLED', false),
+            'enabled' => env('MAIL_MIDDLEWARE_LOG_ENABLED', false),
 
             /*
              * Define a custom logging channel for your filtered message
@@ -109,12 +109,12 @@ return [
              * logging channel (config: logging.default). If this is
              * undefined, it will fall back to the 'stack' channel.
              */
-            'channel' => env('MAIL_ALLOWLIST_LOG_CHANNEL'),
+            'channel' => env('MAIL_MIDDLEWARE_LOG_CHANNEL'),
 
             /*
              * Define the log level to log your filtered messages in.
              */
-            'level' => env('MAIL_ALLOWLIST_LOG_LEVEL', LogLevel::INFO),
+            'level' => env('MAIL_MIDDLEWARE_LOG_LEVEL', LogLevel::INFO),
 
             /*
              * Define, what parts of the message should be logged.
@@ -154,7 +154,7 @@ return [
          * Enables the mail sent middleware.
          */
         'middleware' => [
-            'enabled' => env('MAIL_ALLOWLIST_SENT_MIDDLEWARE_ENABLED', true),
+            'enabled' => env('MAIL_MIDDLEWARE_SENT_ENABLED', true),
 
             /*
              * Define the mail sent middleware every sent message should be passed
@@ -176,19 +176,19 @@ return [
              * Enables the logging of sent messages.
              * Defaults to sending log if set to null.
              */
-            'enabled' => env('MAIL_ALLOWLIST_SENT_LOG_ENABLED'),
+            'enabled' => env('MAIL_MIDDLEWARE_SENT_LOG_ENABLED'),
 
             /*
              * Define a custom logging channel for your sent messages.
              * Defaults to sending log channel if set to null.
              */
-            'channel' => env('MAIL_ALLOWLIST_SENT_LOG_CHANNEL'),
+            'channel' => env('MAIL_MIDDLEWARE_SENT_LOG_CHANNEL'),
 
             /*
              * Define the log level to log your sent messages.
              * Defaults to sending log level if set to null.
              */
-            'level' => env('MAIL_ALLOWLIST_SENT_LOG_LEVEL'),
+            'level' => env('MAIL_MIDDLEWARE_SENT_LOG_LEVEL'),
 
             /*
              * Define, what parts of the sent message should be logged.

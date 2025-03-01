@@ -1,8 +1,8 @@
 <?php
 
-namespace TobMoeller\LaravelMailAllowlist\Actions\Logs;
+namespace TobMoeller\LaravelMailMiddleware\Actions\Logs;
 
-use TobMoeller\LaravelMailAllowlist\MailSentMiddleware\SentMessageContext;
+use TobMoeller\LaravelMailMiddleware\MailSentMiddleware\SentMessageContext;
 
 interface GenerateSentLogMessageContract
 {
