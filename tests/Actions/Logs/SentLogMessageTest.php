@@ -14,8 +14,8 @@ it('is bound to interface', function () {
 });
 
 it('logs the message context', function () {
-    Config::set('mail-allowlist.sent.log.channel', '::channel::');
-    Config::set('mail-allowlist.sent.log.level', LogLevel::INFO);
+    Config::set('mail-middleware.sent.log.channel', '::channel::');
+    Config::set('mail-middleware.sent.log.level', LogLevel::INFO);
 
     $context = new SentMessageContext(generateSentMessage());
 

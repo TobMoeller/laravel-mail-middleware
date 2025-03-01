@@ -25,7 +25,7 @@ class LaravelMailMiddlewareServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-mail-allowlist')
+            ->name('laravel-mail-middleware')
             ->hasConfigFile();
     }
 

@@ -18,7 +18,7 @@ use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\ToFilter;
 
 it('checks if the feature is enabled', function (bool $enabled) {
     Event::fake();
-    Config::set('mail-allowlist.enabled', $enabled);
+    Config::set('mail-middleware.enabled', $enabled);
 
     expect(LaravelMailMiddleware::enabled())
         ->toBe($enabled);
@@ -41,7 +41,7 @@ it('returns default mail middleware', function () {
 });
 
 it('returns mail middleware', function (string $event, mixed $value, mixed $expected) {
-    Config::set('mail-allowlist.'.$event.'.middleware.pipeline', $value);
+    Config::set('mail-middleware.'.$event.'.middleware.pipeline', $value);
 
     $middleware = $event === 'sending' ?
         LaravelMailMiddleware::mailMiddleware() :
@@ -71,7 +71,7 @@ it('returns mail middleware', function (string $event, mixed $value, mixed $expe
 ]);
 
 it('returns the allowed domain list', function (mixed $value, mixed $expected) {
-    Config::set('mail-allowlist.sending.middleware.allowed.domains', $value);
+    Config::set('mail-middleware.sending.middleware.allowed.domains', $value);
 
     expect(LaravelMailMiddleware::allowedDomainList())
         ->toBe($expected);
@@ -95,7 +95,7 @@ it('returns the allowed domain list', function (mixed $value, mixed $expected) {
 ]);
 
 it('returns the allowed email list', function (mixed $value, mixed $expected) {
-    Config::set('mail-allowlist.sending.middleware.allowed.emails', $value);
+    Config::set('mail-middleware.sending.middleware.allowed.emails', $value);
 
     expect(LaravelMailMiddleware::allowedEmailList())
         ->toBe($expected);
@@ -119,9 +119,9 @@ it('returns the allowed email list', function (mixed $value, mixed $expected) {
 ]);
 
 it('returns the global to/cc/bcc email lists', function (mixed $value, mixed $expected) {
-    Config::set('mail-allowlist.sending.middleware.global.to', $value);
-    Config::set('mail-allowlist.sending.middleware.global.cc', $value);
-    Config::set('mail-allowlist.sending.middleware.global.bcc', $value);
+    Config::set('mail-middleware.sending.middleware.global.to', $value);
+    Config::set('mail-middleware.sending.middleware.global.cc', $value);
+    Config::set('mail-middleware.sending.middleware.global.bcc', $value);
 
     expect(LaravelMailMiddleware::globalToEmailList())
         ->toBe($expected)
@@ -149,15 +149,15 @@ it('returns the global to/cc/bcc email lists', function (mixed $value, mixed $ex
 ]);
 
 it('returns if logging is enabled', function (bool $enabled) {
-    Config::set('mail-allowlist.sending.log.enabled', $enabled);
+    Config::set('mail-middleware.sending.log.enabled', $enabled);
 
     expect(LaravelMailMiddleware::logEnabled())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if sent logging is enabled', function (?bool $enabled) {
-    Config::set('mail-allowlist.sending.log.enabled', true);
-    Config::set('mail-allowlist.sent.log.enabled', $enabled);
+    Config::set('mail-middleware.sending.log.enabled', true);
+    Config::set('mail-middleware.sent.log.enabled', $enabled);
 
     expect(LaravelMailMiddleware::sentLogEnabled())
         ->toBe($enabled === null ? true : $enabled);
@@ -165,7 +165,7 @@ it('returns if sent logging is enabled', function (?bool $enabled) {
 
 it('returns the log channel', function (mixed $value, mixed $default, string $expected) {
     Config::set('logging.default', $default);
-    Config::set('mail-allowlist.sending.log.channel', $value);
+    Config::set('mail-middleware.sending.log.channel', $value);
 
     expect(LaravelMailMiddleware::logChannel())
         ->toBe($expected);
@@ -198,8 +198,8 @@ it('returns the log channel', function (mixed $value, mixed $default, string $ex
 ]);
 
 it('returns the sent log channel', function (mixed $value, mixed $default, string $expected) {
-    Config::set('mail-allowlist.sending.log.channel', $default);
-    Config::set('mail-allowlist.sent.log.channel', $value);
+    Config::set('mail-middleware.sending.log.channel', $default);
+    Config::set('mail-middleware.sent.log.channel', $value);
 
     expect(LaravelMailMiddleware::sentLogChannel())
         ->toBe($expected);
@@ -232,22 +232,22 @@ it('returns the sent log channel', function (mixed $value, mixed $default, strin
 ]);
 
 it('returns the log level', function (string $level) {
-    Config::set('mail-allowlist.sending.log.level', $level);
+    Config::set('mail-middleware.sending.log.level', $level);
 
     expect(LaravelMailMiddleware::logLevel())
         ->toBe($level);
 })->with(fn () => array_values((new ReflectionClass(LogLevel::class))->getConstants()));
 
 it('returns the sent log level', function (?string $level) {
-    Config::set('mail-allowlist.sending.log.level', LogLevel::INFO);
-    Config::set('mail-allowlist.sent.log.level', $level);
+    Config::set('mail-middleware.sending.log.level', LogLevel::INFO);
+    Config::set('mail-middleware.sent.log.level', $level);
 
     expect(LaravelMailMiddleware::sentLogLevel())
         ->toBe($level === null ? LogLevel::INFO : $level);
 })->with(fn () => array_merge(array_values((new ReflectionClass(LogLevel::class))->getConstants()), [null]));
 
 it('throws on invalid log levels', function (mixed $level) {
-    Config::set('mail-allowlist.sending.log.level', $level);
+    Config::set('mail-middleware.sending.log.level', $level);
 
     expect(fn () => LaravelMailMiddleware::logLevel())
         ->toThrow(InvalidArgumentException::class, 'Invalid log level provided');
@@ -257,49 +257,49 @@ it('throws on invalid log levels', function (mixed $level) {
 ]);
 
 it('throws on invalid sent log levels', function () {
-    Config::set('mail-allowlist.sent.log.level', '::invalid_level::');
+    Config::set('mail-middleware.sent.log.level', '::invalid_level::');
 
     expect(fn () => LaravelMailMiddleware::sentLogLevel())
         ->toThrow(InvalidArgumentException::class, 'Invalid log level provided');
 });
 
 it('returns if middleware should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sending.log.include.middleware', $enabled);
+    Config::set('mail-middleware.sending.log.include.middleware', $enabled);
 
     expect(LaravelMailMiddleware::logMiddleware())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if headers should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sending.log.include.headers', $enabled);
+    Config::set('mail-middleware.sending.log.include.headers', $enabled);
 
     expect(LaravelMailMiddleware::logHeaders())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if body should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sending.log.include.body', $enabled);
+    Config::set('mail-middleware.sending.log.include.body', $enabled);
 
     expect(LaravelMailMiddleware::logBody())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if sent middleware should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sent.log.include.middleware', $enabled);
+    Config::set('mail-middleware.sent.log.include.middleware', $enabled);
 
     expect(LaravelMailMiddleware::sentLogMiddleware())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if sent headers should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sent.log.include.headers', $enabled);
+    Config::set('mail-middleware.sent.log.include.headers', $enabled);
 
     expect(LaravelMailMiddleware::sentLogHeaders())
         ->toBe($enabled);
 })->with([true, false]);
 
 it('returns if sent body should be logged', function (bool $enabled) {
-    Config::set('mail-allowlist.sent.log.include.body', $enabled);
+    Config::set('mail-middleware.sent.log.include.body', $enabled);
 
     expect(LaravelMailMiddleware::sentLogBody())
         ->toBe($enabled);

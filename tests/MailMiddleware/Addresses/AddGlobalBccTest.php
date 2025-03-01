@@ -7,7 +7,7 @@ use TobMoeller\LaravelMailMiddleware\MailMiddleware\Addresses\AddGlobalBcc;
 use TobMoeller\LaravelMailMiddleware\MailMiddleware\MessageContext;
 
 it('adds global bcc addresses and continues the pipeline', function () {
-    Config::set('mail-allowlist.sending.middleware.global.bcc', ['foo@bar.com', 'bar@foo.com']);
+    Config::set('mail-middleware.sending.middleware.global.bcc', ['foo@bar.com', 'bar@foo.com']);
     $mail = new Email;
     $context = new MessageContext($mail);
 
@@ -28,7 +28,7 @@ it('adds global bcc addresses and continues the pipeline', function () {
 });
 
 it('does not add an address if config is empty and continues the pipeline', function () {
-    Config::set('mail-allowlist.sending.middleware.global.bcc', []);
+    Config::set('mail-middleware.sending.middleware.global.bcc', []);
     $mail = new Email;
     $context = new MessageContext($mail);
 
