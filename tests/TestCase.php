@@ -27,6 +27,9 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+        config()->set('mail.default', 'array');
+        config()->set('mail.mailers.array.transport', 'array');
+        config()->set('queue.default', 'sync');
 
         /*
         $migration = include __DIR__.'/../database/migrations/create_laravel-mail-middleware_table.php.stub';
