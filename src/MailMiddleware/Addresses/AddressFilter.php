@@ -26,18 +26,18 @@ class AddressFilter implements MailMiddlewareContract
 
     public function handle(MessageContext $messageContext, Closure $next): mixed
     {
+        $headers = $messageContext->getMessage()->getHeaders();
+        $recipients = $this->normalizeRecipients($headers->getHeaderBody($this->header->value));
+
+        // Remove old header entirely
+        $headers->remove($this->header->value);
+
         /** @var array<int, Address> */
         $allowedRecipients = [];
         /** @var array<int, Address> */
         $deniedRecipients = [];
 
-        $headers = $messageContext->getMessage()->getHeaders();
-        $recipients = $headers->getHeaderBody($this->header->value);
-
-        // Remove old header entirely
-        $headers->remove($this->header->value);
-
-        foreach (Arr::wrap($recipients) as $recipient) {
+        foreach ($recipients as $recipient) {
             if ($this->addressChecker->check($recipient)) {
                 $allowedRecipients[] = $recipient;
             } else {
@@ -74,5 +74,16 @@ class AddressFilter implements MailMiddlewareContract
         $recipients = Arr::map($recipients, fn (Address $recipient) => $recipient->getAddress());
 
         return Arr::join($recipients, ';');
+    }
+
+    /**
+     * @return array<int, Address>
+     */
+    protected function normalizeRecipients(mixed $recipients): array
+    {
+        return array_values(array_filter(
+            Arr::wrap($recipients),
+            static fn (mixed $recipient): bool => $recipient instanceof Address
+        ));
     }
 }
